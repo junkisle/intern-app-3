@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 
     //Route-Tasks
     Route::get('/index', [TaskController::class, 'index'])->name('intern.task.index');
-    Route::get('/create/{user_id}', [TaskController::class, 'create'])->name('intern.task.create');
+    Route::get('/create/user/{user_id}', [TaskController::class, 'create'])->name('intern.task.create');
     Route::post('/store', [TaskController::class, 'store'])->name('intern.task.store');
 });
 
