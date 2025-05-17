@@ -1,0 +1,37 @@
+@extends('folder-main.app')
+
+@section('title', 'Tasks')
+
+@section('content')
+    <div class="col-6">
+
+        <form class="m-5 p-5 border border-success rounded-5"
+            action="{{ route('intern.task.update', ['task' => $Task->id]) }}" method="post">
+            @csrf
+            @method('PUT')
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <h3>Edit Task: {{ $Task->task_title }}</h3>
+            <input type="hidden" name="user_id" value="{{ $user_id }}" />
+
+            <label for="task-title" class="form-label mt-3">Title</label>
+            <input type="text" class="form-control my-2 border border-success" value="{{ $Task->task_title }}"
+                id="task-title" name="task_title" />
+
+            <input type="hidden" name="status" value="{{ $Task->status }}" />
+
+            <label for="task-description" class="form-label mt-3">Description</label>
+            <textarea type="text" class="form-control my-2 border border-success" id="task-description" name="task_description">{{ $Task->task_description }}</textarea>
+
+            <label for="deadline" class="form-label mt-3">Deadline</label>
+            <input type="date" class="form-control my-2 border border-success" value="{{ $Task->deadline }}"
+                id="deadline" name="deadline" />
+
+            <input class="btn btn-success my-2 form-control mt-3" type="submit" value="Submit">
+        </form>
+    </div>
+
+@endsection

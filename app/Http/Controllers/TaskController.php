@@ -57,7 +57,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        
     }
 
     /**
@@ -65,7 +65,12 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        //
+        $user_id = auth()->user()->id;
+        
+        return view('folder-task.edit')->with([
+            'Task' => $task,
+            'user_id' => $user_id,
+        ]);
     }
 
     /**
@@ -73,7 +78,34 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        //
+        $data = $request->validate([
+            'user_id' => 'required',
+            'task_title' => 'required',
+            'status' => 'required',
+            'task_description' => 'required',
+            'deadline' => 'required|date',
+        ]);
+
+        $task->update($data);
+
+        if($data){
+            return redirect()->route('intern.task.index');
+        }
+    }
+
+    public function updateStatus(Request $request, Task $task)
+    {
+        $data = $request->validate([
+            'status' => 'required',
+        ]);
+
+        $updated = $task->update($data);
+
+        if ($updated) {
+            return redirect()->route('intern.task.index')->with('success', 'Task status updated.');
+        } else {
+            return back()->withInput()->with('error', 'Failed to update task status.');
+        }
     }
 
     /**
