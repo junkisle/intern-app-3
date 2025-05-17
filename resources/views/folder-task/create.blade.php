@@ -5,7 +5,8 @@
 @section('content')
     <div class="col-6">
 
-        <form class="m-5 p-5 border border-success rounded-5" action="{{ route('intern.task.store') }}" method="post">
+        <form class="m-5 p-5 border border-success rounded-5" action="{{ route('intern.task.store') }}" method="post"
+            onsubmit="return confirm('Are you sure you want to create this task?');">
             @csrf
             @if (session('error'))
                 <div class="alert alert-danger">

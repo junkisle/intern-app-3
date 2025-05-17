@@ -81,14 +81,13 @@
         <div class="col-12">
             @foreach ($Tasks as $index => $Task)
                 @if ($userId === $Task->user_id)
-                    <div class="task-content border border-warning rounded-4 my-2 px-3 pb-3 pt-2 h-25 overflow-hidden"
+                    <div class="task-content border border-primary rounded-4 my-2 px-3 pb-3 pt-2 h-25 overflow-hidden"
                         id="task-content-{{ $index }}" style="display: {{ $loop->first ? 'block' : 'none' }};">
                         <span class="d-flex justify-content-between align-items-center pb-2 border-bottom border-success">
                             <div>
                                 <h3 class="">
                                     {{ $Task->task_title }}
                                 </h3>
-
                                 <form action="{{ route('intern.task.update-status', ['task' => $Task->id]) }}"
                                     method="POST">
                                     @csrf
@@ -106,13 +105,17 @@
                                         </optgroup>
                                     </select>
                                 </form>
-
                             </div>
 
-                            <div class="">
+                            <div class="d-flex">
                                 <a href="{{ route('intern.task.edit', ['task' => $Task->id]) }}"
-                                    class="btn btn-primary">Edit</a>
-                                <a class="btn btn-danger">Delete</a>
+                                    class="btn btn-primary mx-1">Edit</a>
+                                <form action="{{ route('intern.task.destroy', ['task' => $Task->id]) }}" method="post"
+                                    onsubmit="return confirm('Are you sure you want to delete this task?');">
+                                    @csrf
+                                    @method('delete')
+                                    <input value="Delete" type="submit" class="mx-1 btn btn-danger" />
+                                </form>
                             </div>
 
                         </span>

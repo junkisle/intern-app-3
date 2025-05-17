@@ -6,7 +6,8 @@
     <div class="col-6">
 
         <form class="m-5 p-5 border border-success rounded-5"
-            action="{{ route('intern.task.update', ['task' => $Task->id]) }}" method="post">
+            action="{{ route('intern.task.update', ['task' => $Task->id]) }}" method="post"
+            onsubmit="return confirm('Are you sure you want to edit this task?');">
             @csrf
             @method('PUT')
             @if (session('error'))

@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit/{task}', [TaskController::class, 'edit'])->name('intern.task.edit');
     Route::put('/update/{task}', [TaskController::class, 'update'])->name('intern.task.update');
     Route::put('/update-status/{task}', [TaskController::class, 'updateStatus'])->name('intern.task.update-status');
+    Route::delete('/destroy/{task}', [TaskController::class, 'destroy'])->name('intern.task.destroy');
 });
 
 require __DIR__.'/auth.php';

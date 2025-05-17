@@ -113,6 +113,10 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        //
+        $confirmDelete = $task->delete();
+        if($confirmDelete){
+            return redirect()->route('intern.task.index');
+        }
+        
     }
 }
