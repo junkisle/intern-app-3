@@ -119,6 +119,7 @@
                             </div>
 
                         </span>
+                        <h6 class="px-2 pt-2">Deadline: {{ $Task->deadline }}</h6>
                         <p class="p-2">{{ $Task->task_description }}</p>
                     </div>
                 @endif

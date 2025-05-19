@@ -5,12 +5,14 @@
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
             <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
+                <a href="{{ route('intern.task.index') }}"
+                    class="nav-link align-middle px-0 {{ request()->routeIs(['intern.task.index', 'intern.task.edit']) ? 'text-white' : '' }}">
                     <i class="fs-4 bi-list-check"></i> <span class="ms-1 d-none d-sm-inline">Tasks</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link px-0 align-middle">
+                <a href="{{ route('intern.note.index') }}"
+                    class="nav-link px-0 align-middle {{ request()->routeIs(['intern.note.index', 'intern.note.edit']) ? 'text-white' : '' }}">
                     <i class="fs-4 bi-journal-bookmark-fill"></i> <span class="ms-1 d-none d-sm-inline">Notes</span></a>
             </li>
             <li>
