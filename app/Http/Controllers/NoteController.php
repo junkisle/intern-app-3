@@ -12,15 +12,20 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return view('folder-notes.index');
+        $userId = auth()->user()->id;
+        $userName = auth()->user()->name;
+        $Notes = Note::all();
+
+        return view('folder-notes.index')->with(['user_id' => $userId,
+                                                 'Notes' => $Notes]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($user_id)
     {
-        //
+        return view('folder-notes.create')->with(['user_id' => $user_id]);
     }
 
     /**
@@ -28,7 +33,19 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'user_id' => 'required',
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $newNote = Note::create($data);
+        
+        if($newNote){
+            return redirect()->route('intern.note.index');
+        } else {
+            return back()->with('error', 'Failed to create a new note');
+        }
     }
 
     /**
